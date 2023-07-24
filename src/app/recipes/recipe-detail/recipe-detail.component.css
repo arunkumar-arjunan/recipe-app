@@ -2,12 +2,3 @@
   background-color: steelblue;
   color: #ffffff; /* Change the font color as needed */
 }
-
-/* remove the effect of button click */
-.btn-custom-steelblue:focus, .btn-custom-steelblue:active {
-  background-color: steelblue;  /* Same as the color you set for the btn-custom class */
-  border-color: #123456;  /* You may want to change this if you have a border */
-  box-shadow: none;  /* Removes Bootstrap's focus shadow */
-  color: #ffffff; /* Same as the color you set for the btn-custom class */
-  outline: none; /* Removes the outline */
-}

@@ -11,6 +11,9 @@ import { RecipeItemComponent } from './recipes/recipe-list/recipe-item/recipe-it
 import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-edit.component';
 import {NgOptimizedImage} from "@angular/common";
+import { DropdownDirective } from './shared/dropdown.directive';
+import { TestComponent } from './test/test.component';
+import { DropdowntestDirective } from './shared/dropdowntest.directive';
 
 @NgModule({
   declarations: [
@@ -21,7 +24,10 @@ import {NgOptimizedImage} from "@angular/common";
     RecipeDetailComponent,
     RecipeItemComponent,
     ShoppingListComponent,
-    ShoppingEditComponent
+    ShoppingEditComponent,
+    DropdownDirective,
+    TestComponent,
+    DropdowntestDirective
   ],
     imports: [
         BrowserModule,
