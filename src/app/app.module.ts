@@ -14,6 +14,7 @@ import {NgOptimizedImage} from "@angular/common";
 import { DropdownDirective } from './shared/dropdown.directive';
 import { TestComponent } from './test/test.component';
 import { DropdowntestDirective } from './shared/dropdowntest.directive';
+import {ShoppingListService} from "./shopping-list/shopping-list.service";
 
 @NgModule({
   declarations: [
@@ -34,7 +35,7 @@ import { DropdowntestDirective } from './shared/dropdowntest.directive';
         FormsModule,
         NgOptimizedImage
     ],
-  providers: [],
+  providers: [ShoppingListService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
