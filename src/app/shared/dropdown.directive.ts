@@ -1,5 +1,7 @@
 import { Directive, HostListener, Renderer2, ElementRef } from '@angular/core';
 
+//This is a custom directive where we can use this directive name appDropdown as directive in the tags
+//<..... class="btn btn-custom-steelblue dropdown-toggle"  appDropdown>
 @Directive({
   selector: '[appDropdown]',
 })
