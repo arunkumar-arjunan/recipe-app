@@ -15,6 +15,7 @@ import { DropdownDirective } from './shared/dropdown.directive';
 import { TestComponent } from './test/test.component';
 import { DropdowntestDirective } from './shared/dropdowntest.directive';
 import {ShoppingListService} from "./shopping-list/shopping-list.service";
+import {AppRoutingModule} from "./app-routing.module";
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import {ShoppingListService} from "./shopping-list/shopping-list.service";
     imports: [
         BrowserModule,
         FormsModule,
-        NgOptimizedImage
+        NgOptimizedImage,
+        AppRoutingModule
     ],
   providers: [ShoppingListService],
   bootstrap: [AppComponent]

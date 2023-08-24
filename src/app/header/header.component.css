@@ -1,0 +1,7 @@
+.nav-link.active {
+  background-color: rgba(135, 162, 190, 0.21); /* Blue background */
+  color: black;              /* White text color */
+  font-weight: bold;         /* Bold text */
+  border-radius: 5px;       /* Rounded corners */
+  padding: 5px 10px;        /* Some padding */
+}
