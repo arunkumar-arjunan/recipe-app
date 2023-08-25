@@ -2,6 +2,7 @@ import {Recipe} from "./recipe.model";
 import {Injectable} from "@angular/core";
 import {Ingredient} from "../shared/ingredient.model";
 import {ShoppingListService} from "../shopping-list/shopping-list.service";
+import {Subject} from "rxjs";
 
 //This is a service class where we can keep business logics in the service layer
 //we want to avoid above and provide this at root level you can use this
@@ -11,9 +12,11 @@ import {ShoppingListService} from "../shopping-list/shopping-list.service";
 @Injectable()
 export class RecipeService {
 
+  recipesChanged = new Subject<Recipe[]>();
+
   constructor(private shoppingListService: ShoppingListService) { }
 
-  private _recipes: Recipe[] =  [
+  private recipes: Recipe[] =  [
     new Recipe('Palak Paneer', 'Good for health',
       'https://images.unsplash.com/photo-1589647363585-f4a7d3877b10?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1172&q=80',
       [
@@ -28,15 +31,32 @@ export class RecipeService {
   ];
 
   getRecipes(): Recipe[] {
-    return this._recipes.slice();
+    return this.recipes.slice();
   }
 
   getRecipe(index: number){
-    return this._recipes.slice()[index];
+    return this.recipes.slice()[index];
   }
 
   addIngredientsToShoppingList(ingredients: Ingredient[]){
     this.shoppingListService.addIngredients(ingredients);
   }
+
+  addRecipe(recipe: Recipe){
+    this.recipes.push(recipe);
+    this.recipesChanged.next(this.recipes.slice());
+  }
+
+  updateRecipe(index: number, newRecipe: Recipe){
+    this.recipes[index] = newRecipe;
+    this.recipesChanged.next(this.recipes.slice());
+  }
+
+  deleteRecipe(index: number){
+    this.recipes.splice(index, 1);
+    this.recipesChanged.next(this.recipes.slice());
+  }
+
+
 
 }
