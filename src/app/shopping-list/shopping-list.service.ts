@@ -7,28 +7,43 @@ import {Subject} from "rxjs";
 })
 export class ShoppingListService {
 
-  ingredientsChanged = new Subject<Ingredient[]>;
+  ingredientsChanged = new Subject<Ingredient[]>();
+  startedEditing = new Subject<number>()
 
   constructor() { }
 
-  private _ingredients: Ingredient[] = [
+  private ingredients: Ingredient[] = [
     new Ingredient('Apples', 5),
     new Ingredient('Tomatoes', 10),
   ];
 
   getIngredients() {
-    return this._ingredients.slice();
+    return this.ingredients.slice();
   }
 
   addIngredient(ingredient: Ingredient){
-    this._ingredients.push(ingredient);
+    this.ingredients.push(ingredient);
     //since get method returns only copy of ingredients, we are emitting the new ingredients list when we change
-    this.ingredientsChanged.next(this._ingredients.slice());
+    this.ingredientsChanged.next(this.ingredients.slice());
   }
 
   addIngredients(ingredients: Ingredient[]){
-    this._ingredients.push(...ingredients);
-    this.ingredientsChanged.next(this._ingredients.slice());
+    this.ingredients.push(...ingredients);
+    this.ingredientsChanged.next(this.ingredients.slice());
+  }
+
+  getIngredient(index: number){
+    return this.ingredients[index];
+  }
+
+  updateIngredient(index: number, newIngredient: Ingredient){
+    this.ingredients[index] = newIngredient;
+    this.ingredientsChanged.next(this.ingredients.slice());
+  }
+
+  deleteIngredient(index: number){
+    this.ingredients.splice(index,1);
+    this.ingredientsChanged.next(this.ingredients.slice());
   }
 
 }
