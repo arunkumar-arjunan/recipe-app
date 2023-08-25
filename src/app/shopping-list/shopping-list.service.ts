@@ -1,12 +1,13 @@
-import {EventEmitter, Injectable} from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Ingredient} from "../shared/ingredient.model";
+import {Subject} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ShoppingListService {
 
-  ingredientsChanged = new EventEmitter<Ingredient[]>;
+  ingredientsChanged = new Subject<Ingredient[]>;
 
   constructor() { }
 
@@ -22,12 +23,12 @@ export class ShoppingListService {
   addIngredient(ingredient: Ingredient){
     this._ingredients.push(ingredient);
     //since get method returns only copy of ingredients, we are emitting the new ingredients list when we change
-    this.ingredientsChanged.emit(this._ingredients.slice());
+    this.ingredientsChanged.next(this._ingredients.slice());
   }
 
   addIngredients(ingredients: Ingredient[]){
     this._ingredients.push(...ingredients);
-    this.ingredientsChanged.emit(this._ingredients.slice());
+    this.ingredientsChanged.next(this._ingredients.slice());
   }
 
 }

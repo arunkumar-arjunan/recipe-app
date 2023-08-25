@@ -23,7 +23,13 @@
       </button>
       <div class="dropdown-menu">
         <li><a (click)="onAddToShoppingList()" style="cursor: pointer;" class="dropdown-item w-100 btn btn-secondary">To Shopping List</a></li>
-        <li><a style="cursor: pointer;" class="dropdown-item w-100 btn btn-secondary">Edit Recipe</a></li>
+        <li><a style="cursor: pointer;"
+               class="dropdown-item w-100 btn btn-secondary"
+               (click)="onEditRecipe()"
+              >
+              Edit Recipe
+            </a>
+        </li>
         <li><a style="cursor: pointer;" class="dropdown-item w-100 btn btn-secondary">Delete Recipe</a></li>
       </div>
     </div>

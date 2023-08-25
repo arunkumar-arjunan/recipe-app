@@ -1,9 +1,10 @@
 <a
   style="cursor: pointer"
-  class="list-group-item clearfix"
-        (click)="onSelected()">
+  [routerLink]="[index]"
+  routerLinkActive="active"
+  class="list-group-item clearfix">
 
-  <div class="d-flex align-items-center border">
+  <div class="d-flex align-items-center">
     <div class="ms-3 mt-2">
       <h4 class="list-group fw-bold">{{ recipe.name }}</h4>
       <p class="list-group-item">{{ recipe.description }}</p>
