@@ -7,8 +7,6 @@ import { RecipeService } from "./recipe.service";
 @Injectable({ providedIn: "root" })
 export class RecipeResolverService {
 
-  constructor(private recipeService: RecipeService, private dataStorageService: DataStorageService) {}
-
   static fetchRecipes: ResolveFn<Recipe[]> = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
     const recipeService = inject(RecipeService);
     const dataStorageService = inject(DataStorageService);
