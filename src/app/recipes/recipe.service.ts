@@ -16,19 +16,7 @@ export class RecipeService {
 
   constructor(private shoppingListService: ShoppingListService) { }
 
-  private recipes: Recipe[] =  [
-    new Recipe('Palak Paneer', 'Good for health',
-      'https://images.unsplash.com/photo-1589647363585-f4a7d3877b10?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1172&q=80',
-      [
-        new Ingredient('Spinach', 1),
-        new Ingredient('Paneer', 5)
-      ]),
-    new Recipe('Veg Biriyani', 'Best Alternative for Mutton Biriyani',
-      'https://yellowchilis.com/wp-content/uploads/2020/09/veg-biryani-onepot-meal-unchanged-2.jpg', [
-        new Ingredient('Vegetables', 10),
-        new Ingredient('Rice', 15)
-      ])
-  ];
+  private recipes: Recipe[] = [];
 
   getRecipes(): Recipe[] {
     return this.recipes.slice();
@@ -54,6 +42,11 @@ export class RecipeService {
 
   deleteRecipe(index: number){
     this.recipes.splice(index, 1);
+    this.recipesChanged.next(this.recipes.slice());
+  }
+
+  setRecipes(recipes: Recipe[]){
+    this.recipes = recipes;
     this.recipesChanged.next(this.recipes.slice());
   }
 

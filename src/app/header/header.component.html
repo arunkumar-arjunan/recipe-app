@@ -4,7 +4,7 @@
         class="navbar-brand">
       <img
         class="d-inline-block align-top"
-        ngSrc="../../assets/images/heart-food.jpg"
+        src="../../assets/images/pizza.jpg"
         width="30"
         height="30"
         alt=""/>
@@ -31,9 +31,15 @@
             Manage
           </a>
           <ul class="dropdown-menu">
-            <li><a style="cursor: pointer;" class="dropdown-item">Save Data</a>
+            <li><a style="cursor: pointer;"
+                   class="dropdown-item"
+                   (click)="onSaveData()"
+            >Save Data</a>
             </li>
-            <li><a style="cursor: pointer;" class="dropdown-item">Fetch Data</a>
+            <li><a style="cursor: pointer;"
+                   class="dropdown-item"
+                   (click)="onFetchData()"
+            >Fetch Data</a>
             </li>
           </ul>
         </li>
