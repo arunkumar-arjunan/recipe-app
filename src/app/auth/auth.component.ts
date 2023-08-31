@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {NgForm} from "@angular/forms";
-import {AuthService} from "./auth.service";
+import {AuthResponseData, AuthService} from "./auth.service";
 import {catchError, tap} from "rxjs/operators";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-auth',
@@ -21,8 +22,6 @@ export class AuthComponent {
 
   onSubmit(authForm: NgForm) {
 
-    console.log('here1');
-
     if(!authForm.valid){
       console.log('here2');
       return;
@@ -30,29 +29,27 @@ export class AuthComponent {
 
     const email = authForm.value.email;
     const password = authForm.value.password;
+    let authObs: Observable<AuthResponseData>;
 
     this.isLoading = true;
 
     if(this.isLoginMode){
-      console.log('here3');
+      authObs= this.authService.login(email, password);
     } else {
-      console.log('here4');
-      this.authService.signUp(email, password).pipe(
-        tap((resData) => {
-          console.log('resData -- ', resData);
-          this.isLoading = false;
-        }),
-        catchError((errorRes) => {
-          this.isLoading = false;
-
-          this.error = errorRes;
-
-          throw errorRes; // You can rethrow the errorRes if needed
-        })
-      ).subscribe();
+      authObs = this.authService.signUp(email, password);
     }
 
-    console.log('here5');
+    authObs.pipe(
+      tap((resData) => {
+        this.isLoading = false;
+        this.authService.navigateToRecipes();
+      }),
+      catchError((errorRes) => {
+        this.isLoading = false;
+        this.error = errorRes;
+        throw errorRes; // You can rethrow the errorRes if needed
+      })
+    ).subscribe();
 
     authForm.reset();
 
