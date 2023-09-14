@@ -1,6 +1,5 @@
 import {Injectable} from "@angular/core";
-import {HttpEvent, HttpHandler, HttpInterceptor, HttpParams, HttpRequest} from "@angular/common/http";
-import {Observable} from "rxjs";
+import {HttpHandler, HttpInterceptor, HttpParams, HttpRequest} from "@angular/common/http";
 import {AuthService} from "./auth.service";
 import {exhaustMap, take} from "rxjs/operators";
 
@@ -15,6 +14,11 @@ export class AuthInterceptorService implements HttpInterceptor{
     return this.authService.userSubject.pipe(
       take(1),
       exhaustMap(userModel => {
+
+        if(!userModel){
+          return next.handle(req);
+        }
+
         const modifiedReq = req.clone({
           params: new HttpParams().set('auth', userModel.token)
       });
